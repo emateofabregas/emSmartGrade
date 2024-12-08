@@ -1,0 +1,181 @@
+Group {
+name emSmartGrade
+inputs 2
+tile_color 0x79a9ffff
+label "\[value in]"
+note_font Verdana
+addUserKnob {20 User l emSmartGrade}
+addUserKnob {41 in l AOV T AOV.in}
+addUserKnob {6 view_aov l "View AOV" t "View selected AOV" +STARTLINE}
+addUserKnob {6 remove l "Remove AOV" t "Removing current AOV from the beauty" -STARTLINE}
+addUserKnob {6 reshuffle l "Reshuffle AOV" t "Reshuffle AOV" -STARTLINE}
+reshuffle true
+addUserKnob {26 grap_2 l " " T " "}
+addUserKnob {41 exposure T Exposure1.red}
+addUserKnob {7 saturation R 0 4}
+saturation 1
+addUserKnob {41 white l gain T Grade1.white}
+addUserKnob {41 multiply T Grade1.multiply}
+addUserKnob {41 gamma T Grade1.gamma}
+addUserKnob {41 black_clamp l "black clamp" T Grade1.black_clamp}
+addUserKnob {41 maximum_enable l "white clamp" t "Output than 1 is greater is changed to 1" -STARTLINE T Clamp1.maximum_enable}
+addUserKnob {41 maximum l "max white" t "Controls maximum values in your image. If the value is set up to 1, the node is disabled. " T Clamp1.maximum}
+addUserKnob {41 maximum_enable_1 l enable -STARTLINE T Clamp1.maximum_enable}
+addUserKnob {26 ""}
+addUserKnob {26 "" l mask T ""}
+addUserKnob {41 maskChannelInput l "" -STARTLINE T Merge2.maskChannelInput}
+addUserKnob {41 inject -STARTLINE T Merge2.inject}
+addUserKnob {41 invert_mask l invert -STARTLINE T Merge2.invert_mask}
+addUserKnob {41 fringe -STARTLINE T Merge2.fringe}
+addUserKnob {41 mix T Merge2.mix}
+addUserKnob {26 ""}
+addUserKnob {26 autor l "" +STARTLINE T "<font color=\"grey\">emSmartGrade v1.1 | emateofabregas.com | 2024</font>"}
+}
+Input {
+inputs 0
+name Img
+xpos -129
+ypos -747
+}
+Dot {
+name Dot4
+xpos -95
+ypos -687
+}
+set N5e157c00 [stack 0]
+Shuffle {
+in2 rgba
+alpha alpha2
+name AOV
+xpos -315
+ypos -665
+}
+set N2be17400 [stack 0]
+EXPTool {
+mode Stops
+green {{parent.exposure}}
+blue {{parent.exposure}}
+maskChannelMask {{{parent.Grade1.maskChannelMask}}}
+inject {{parent.Grade1.inject}}
+invert_mask {{parent.Grade1.invert_mask}}
+fringe {{parent.Grade1.fringe}}
+unpremult {{{parent.Grade1.unpremult}}}
+invert_unpremult {{parent.Grade1.invert_unpremult}}
+name Exposure1
+xpos -315
+ypos -622
+disable {{"red == 0"}}
+}
+Grade {
+white {1 1 1 1}
+white_panelDropped true
+name Grade1
+xpos -315
+ypos -579
+}
+Saturation {
+saturation {{"parent.saturation > 1 ? 1+(-(-1*parent.saturation*0.125)) : parent.saturation"}}
+name Saturation1
+xpos -315
+ypos -548
+disable {{"saturation == 1"}}
+}
+Clamp {
+channels rgb
+minimum_enable false
+maximum_enable false
+name Clamp1
+xpos -315
+ypos -516
+disable {{"maximum_enable == 0"}}
+}
+Remove {
+channels rgba
+name Remove1
+xpos -315
+ypos -467
+disable {{!parent.remove}}
+}
+Dot {
+name Dot2
+xpos -281
+ypos -434
+}
+set N2bdb1800 [stack 0]
+Dot {
+name Dot7
+xpos -281
+ypos -398
+}
+set N2bdb0800 [stack 0]
+Dot {
+name Dot3
+xpos -281
+ypos -366
+}
+push $N2bdb0800
+Input {
+inputs 0
+name Mask
+xpos -426
+ypos -733
+number 1
+}
+push $N5e157c00
+Switch {
+inputs 2
+which 1
+name Switch2
+xpos -426
+ypos -690
+disable {{"!\[exists parent.input1]"}}
+}
+set N31ba6300 [stack 0]
+Dot {
+name Dot9
+xpos -392
+ypos -402
+}
+push $N2bdb1800
+push $N31ba6300
+push $N2be17400
+push $N5e157c00
+Merge2 {
+inputs 2+1
+operation from
+Achannels rgb
+name Merge1
+xpos -129
+ypos -622
+}
+Merge2 {
+inputs 2+1
+operation plus
+Achannels rgb
+name Merge2
+xpos -129
+ypos -437
+disable {{parent.remove}}
+}
+ShuffleCopy {
+inputs 2
+alpha alpha2
+out2 {{{parent.AOV.in}}}
+name ShuffleCopy
+xpos -129
+ypos -400
+disable {{!parent.reshuffle}}
+}
+Switch {
+inputs 2
+which {{parent.view_aov}}
+name view_aov
+xpos -129
+ypos -369
+}
+Output {
+name Output1
+xpos -129
+ypos -316
+}
+end_group
