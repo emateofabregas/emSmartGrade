@@ -1,6 +1,6 @@
 ![emSmartGrade_001](https://github.com/user-attachments/assets/c8d7c172-3d07-4a7f-98ec-9ab166102205)
 
-**emSmartGrade** is Nuke Gizmo focused on adjusting CG AOV beauty pass without destroying the image.
+**emSmartGrade** is Nuke Gizmo focused on adjusting CG AOV beauty pass.
 
 ![emSmartGrade_002](https://github.com/user-attachments/assets/87d2f135-f000-4d08-ac81-fd170443a384)
 
