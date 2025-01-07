@@ -13,7 +13,7 @@ addUserKnob {6 reshuffle l "Reshuffle AOV" t "Reshuffle AOV" -STARTLINE}
 reshuffle true
 addUserKnob {26 grap_2 l " " T " "}
 addUserKnob {7 exposure R -5 5}
-exposure -5
+exposure 0
 addUserKnob {7 saturation R 0 4}
 saturation 1
 addUserKnob {19 multiply l multply R 0 4}
