@@ -4,6 +4,13 @@
 
 ![emSmartGrade_002](https://github.com/user-attachments/assets/87d2f135-f000-4d08-ac81-fd170443a384)
 
-You have control on exposure, saturation, gain, multiply, and gamma. Also, you can clamp the black and white or use custom white clamp values. There is a Mask input that you can connect to your specific mask only to affect an area in your image.
+You can control exposure, saturation, gain, and multiply. You can also clamp the black or white values. A mask input can be connected to your specific mask to affect an area in your image.
 
-![emSmartGrade_003](https://github.com/user-attachments/assets/6da99e67-b36f-47bd-b42f-345e96d061aa)
+![emSmartGrade_003_2](https://github.com/user-attachments/assets/4f81c62d-ec85-4d75-8319-aad84cec198c)
+
+** V.1.3 UPDATES:**
+- Tech updates: Blinkscript code implemented to make the knobs (exposure, saturation, gain and multiply) instead of using different nodes in Nuke.
+- 'Set Default' button to set up the knobs by default.
+- Removed the 'gamma' knob.
+- Fixed reshuffle AOV checkbox.
+- Fixed Mask Issues.
