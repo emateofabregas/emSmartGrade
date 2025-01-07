@@ -13,6 +13,7 @@ addUserKnob {6 reshuffle l "Reshuffle AOV" t "Reshuffle AOV" -STARTLINE}
 reshuffle true
 addUserKnob {26 grap_2 l " " T " "}
 addUserKnob {7 exposure R -5 5}
+exposure -5
 addUserKnob {7 saturation R 0 4}
 saturation 1
 addUserKnob {19 multiply l multply R 0 4}
@@ -45,7 +46,6 @@ ypos -690
 }
 set N6ac87000 [stack 0]
 Shuffle {
-in rgb
 in2 rgba
 alpha black
 name AOV
@@ -65,7 +65,6 @@ Grade_multiply {{parent.multiply} {parent.multiply} {parent.multiply} {parent.mu
 Grade_gain {{parent.gain} {parent.gain} {parent.gain} {parent.gain}}
 rebuild_finalise ""
 name BlinkScript1
-selected true
 xpos -268
 ypos -611
 }
@@ -119,6 +118,10 @@ Merge2 {
 inputs 2+1
 operation from
 Achannels rgb
+inject {{parent.Merge2.inject}}
+invert_mask {{parent.Merge2.invert_mask}}
+fringe {{parent.Merge2.fringe}}
+mix {{parent.Merge2.mix}}
 name Merge1
 xpos -129
 ypos -622
@@ -127,6 +130,7 @@ Merge2 {
 inputs 2+1
 operation plus
 Achannels rgb
+invert_mask true
 name Merge2
 xpos -129
 ypos -533
