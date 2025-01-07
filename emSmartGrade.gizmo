@@ -43,16 +43,21 @@ Group {
   xpos -129
   ypos -690
  }
-set Na65b1c00 [stack 0]
+set Necbba800 [stack 0]
  Shuffle {
   in rgb
   in2 rgba
-  alpha black
+  alpha alpha2
+  black red
+  white green
+  red2 blue
+  green2 alpha
+  out2 rgba
   name AOV
   xpos -268
   ypos -654
  }
-set Na33e8c00 [stack 0]
+set Necbbac00 [stack 0]
  BlinkScript {
   recompileCount 55
   ProgramGroup 1
@@ -75,19 +80,19 @@ set Na33e8c00 [stack 0]
   ypos -550
   disable {{!parent.remove}}
  }
-set Na33e8000 [stack 0]
+set Necbbb400 [stack 0]
  Dot {
   name Dot7
   xpos -234
   ypos -489
  }
-set N83199c00 [stack 0]
+set Necbbb800 [stack 0]
  Dot {
   name Dot3
   xpos -234
   ypos -457
  }
-push $N83199c00
+push $Necbbb800
  Input {
   inputs 0
   name Mask
@@ -95,7 +100,7 @@ push $N83199c00
   ypos -733
   number 1
  }
-push $Na65b1c00
+push $Necbba800
  Switch {
   inputs 2
   which 1
@@ -109,11 +114,11 @@ push $Na65b1c00
   xpos -326
   ypos -530
  }
-set Nac689400 [stack 0]
-push $Na33e8000
-push $Nac689400
-push $Na33e8c00
-push $Na65b1c00
+set N35de4400 [stack 0]
+push $Necbbb400
+push $N35de4400
+push $Necbbac00
+push $Necbba800
  Merge2 {
   inputs 2+1
   operation from
@@ -135,9 +140,14 @@ push $Na65b1c00
   ypos -533
   disable {{parent.remove}}
  }
+add_layer {RGBA_key RGBA_key.red RGBA_key.green RGBA_key.blue RGBA_key.alpha}
  ShuffleCopy {
   inputs 2
   alpha alpha2
+  black red
+  white green
+  red2 blue
+  green2 alpha
   out2 {{{parent.AOV.in}}}
   name ShuffleCopy
   xpos -129
@@ -153,6 +163,7 @@ push $Na65b1c00
  }
  Output {
   name Output1
+  selected true
   xpos -129
   ypos -408
  }
